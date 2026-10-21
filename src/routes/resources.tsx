@@ -15,7 +15,8 @@ export const Route = createFileRoute("/resources")({
 });
 
 function Resources() {
-  const [featured, ...rest] = ARTICLES;
+  const featured = ARTICLES[0]!;
+  const rest = ARTICLES.slice(1);
   return (
     <>
       <PageHero eyebrow="Resources" title="Insights for learning, research and work."
