@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, MessageSquare } 
 import { PageHero, WhatsAppIcon, btn } from "@/components/site/ui";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { CONTACT, whatsappLink } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
   validateSearch: z.object({ service: z.string().optional() }),

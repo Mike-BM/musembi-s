@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, SectionHeading, btn, WhatsAppButton } from "@/components/site/ui";
 import { AUDIENCES, PROGRAMMES, type Programme } from "@/lib/site";
 import { Check, Clock, Users, Laptop, Building2, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/training")({
   head: () => ({
