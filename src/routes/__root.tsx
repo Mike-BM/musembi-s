@@ -23,7 +23,7 @@ function NotFoundComponent() {
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist or has been moved.</p>
         <div className="mt-6">
-          <Link to="/" className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-deep">Go home</Link>
+          <Link to="/" className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-deep">Go home</Link>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/logo.jpeg", type: "image/jpeg" },
     ],
   }),
   shellComponent: RootShell,
@@ -78,7 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <head><HeadContent /></head>
+      <head>
+        <HeadContent />
+        <style
+          dangerouslySetInnerHTML={{
+            __html:
+              "#lovable-badge, aside#lovable-badge, [id^='lovable-badge'], [class*='lovable-badge'] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }",
+          }}
+        />
+      </head>
       <body>
         {children}
         <Scripts />
@@ -89,6 +97,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  // Actively remove any dynamically injected Lovable badge from the DOM
+  useEffect(() => {
+    const purgeLovableBadge = () => {
+      const candidates = document.querySelectorAll(
+        "#lovable-badge, aside#lovable-badge, [id^='lovable-badge'], [class*='lovable-badge'], [data-lovable-badge]"
+      );
+      candidates.forEach((el) => el.remove());
+    };
+
+    purgeLovableBadge();
+    const observer = new MutationObserver(purgeLovableBadge);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <SiteHeader />
