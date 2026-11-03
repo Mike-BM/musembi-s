@@ -84,7 +84,7 @@ function ServicesPage() {
                 1. Academic & Research
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Targeted support for theses, dissertations, methodology instruments, and proposal concept notes.
+                Targeted support for CBC/CBE Advisory, theses, dissertations, methodology instruments, and proposal concept notes.
               </p>
             </div>
 

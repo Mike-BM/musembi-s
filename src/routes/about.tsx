@@ -167,11 +167,19 @@ function About() {
           <div className="max-w-2xl">
             <span className="eyebrow">Consultancy Details</span>
             <h3 className="mt-3 font-display text-2xl font-normal text-primary-deep">
-              Based in Nairobi, Kenya · Serving Clients Globally
+              Based in Kikima, Kenya · Serving Clients Globally
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Consultations are conducted through scheduled virtual sessions (Google Meet, Zoom, WhatsApp) as well as by appointment in Nairobi, Kenya. Every client is assigned a designated contact to ensure continuity and prompt communication.
-            </p>
+            <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+              <p>
+                <strong>Location:</strong> Based in Kikima, Kenya · Serving Clients Globally
+              </p>
+              <p>
+                <strong>Delivery Modes:</strong> Virtual consultations conducted through Google Meet, Zoom, and WhatsApp. In-person meetings by scheduled appointment.
+              </p>
+              <p>
+                <strong>Client Assurance:</strong> Every client is assigned a designated lead consultant to ensure project continuity, clear communication, and timely milestone tracking.
+              </p>
+            </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link to="/contact" className={btn.primary}>
                 Contact the Consultancy

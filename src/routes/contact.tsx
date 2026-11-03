@@ -11,7 +11,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Us & Request Consultation — Musembi S. Educational Consultancy" },
-      { name: "description", content: "Contact Musembi S. Educational Consultancy in Nairobi, Kenya. Call or WhatsApp 0794 191 690, email info.musembisconsultancy@gmail.com, or submit an enquiry." },
+      { name: "description", content: "Contact Musembi S. Educational Consultancy in Kikima, Kenya. Call or WhatsApp 0794 191 690, email info.musembisconsultancy@gmail.com, or submit an enquiry." },
       { property: "og:title", content: "Contact Musembi S. Educational Consultancy" },
       { property: "og:description", content: "Request an academic consultation, research review, or institutional training." },
     ],
@@ -93,12 +93,22 @@ function ContactPage() {
               <div className="flex items-start gap-3 pt-3 border-t border-border/50">
                 <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                 <div>
+                  <p className="font-semibold text-primary-deep">Postal Address</p>
+                  <p className="text-muted-foreground mt-0.5">
+                    {CONTACT.postalAddress}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 pt-3 border-t border-border/50">
+                <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                <div>
                   <p className="font-semibold text-primary-deep">Location & Service Modes</p>
                   <p className="text-muted-foreground mt-0.5">
                     {CONTACT.location}
                   </p>
                   <p className="text-muted-foreground mt-0.5">
-                    Virtual consultations conducted via Google Meet, Zoom, and WhatsApp. In-person meetings in Nairobi by appointment.
+                    Virtual consultations conducted via Google Meet, Zoom, and WhatsApp. In-person meetings by appointment.
                   </p>
                 </div>
               </div>
@@ -122,11 +132,11 @@ function ContactPage() {
               <ul className="space-y-2.5 text-xs text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                  <span><strong>Step 1:</strong> Initial review of your project scope and deadlines within 24 hours.</span>
+                  <span><strong>Step 1:</strong> Initial review of your project scope deliverables and deadlines within 24 business hours.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                  <span><strong>Step 2:</strong> Brief scoping dialogue to confirm deliverables and academic guidelines.</span>
+                  <span><strong>Step 2:</strong> Brief scoping dialogue (via WhatsApp or email) to confirm institutional guidelines and academic requirements.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />

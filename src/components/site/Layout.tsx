@@ -243,7 +243,8 @@ export function SiteFooter() {
               <MapPin className="h-4 w-4 shrink-0 text-gold mt-0.5" />
               <div>
                 <span className="font-medium">{CONTACT.location}</span>
-                <p className="text-xs text-white/60">Virtual sessions & by appointment</p>
+                <p className="text-xs text-white/60">Virtual sessions globally · In-person by appointment</p>
+                <p className="text-xs text-white/70 mt-1">{CONTACT.postalAddress}</p>
               </div>
             </li>
             <li className="flex items-start gap-2.5">
@@ -263,7 +264,7 @@ export function SiteFooter() {
             Together, we learn. Together, we grow.
           </p>
           <p>
-            © {new Date().getFullYear()} Musembi S. Educational Consultancy. All rights reserved.
+            © 2026 Musembi S. Educational Consultancy. All rights reserved.
           </p>
         </div>
       </div>

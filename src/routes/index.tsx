@@ -65,18 +65,18 @@ function Home() {
               </div>
 
               {/* Discrete Credibility Strip */}
-              <div className="mt-10 pt-6 border-t border-border/60 grid grid-cols-3 gap-4 max-w-lg">
+              <div className="mt-10 pt-6 border-t border-border/60 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl">
                 <div>
-                  <p className="font-display text-lg font-semibold text-primary-deep">10 Services</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Academic & writing practice</p>
+                  <p className="font-display text-sm font-semibold text-primary-deep">Comprehensive Coverage</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">10 specialised practice and consultancy service areas</p>
                 </div>
                 <div>
-                  <p className="font-display text-lg font-semibold text-primary-deep">1-on-1</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Individualized mentorship</p>
+                  <p className="font-display text-sm font-semibold text-primary-deep">Individualized Approach</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">1-on-1 individualized academic mentorship & coaching</p>
                 </div>
                 <div>
-                  <p className="font-display text-lg font-semibold text-primary-deep">Ethics First</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Confidentiality & integrity</p>
+                  <p className="font-display text-sm font-semibold text-primary-deep">Ethics First Guarantee</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Strict academic integrity & confidentiality boundaries</p>
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@ function Home() {
                     Academic Consultation & Advisory Desk
                   </p>
                   <p>
-                    Direct, professional guidance for academic research proposals, substantive manuscript editing, referencing standards, and career portfolios.
+                    Direct, professional guidance for Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory, academic research proposals, substantive manuscript editing, referencing standards, and career portfolios.
                   </p>
                 </div>
 
@@ -123,7 +123,7 @@ function Home() {
                 <div className="space-y-2.5 pt-2 border-t border-border/50 text-xs">
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                    <span><strong>10 Practice Areas:</strong> Research, writing, translation & tutoring</span>
+                    <span><strong>10 Practice Areas:</strong> Research, writing, translation, CBC/CBE Advisory & tutoring</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
@@ -157,7 +157,7 @@ function Home() {
 
                 {/* Location indicator */}
                 <div className="pt-2 text-center text-[0.7rem] text-muted-foreground">
-                  <span>Based in Nairobi, Kenya · Serving Scholars & Institutions Globally</span>
+                  <span>Based in Kikima, Kenya · Serving Scholars & Institutions Globally</span>
                 </div>
               </div>
             </div>
@@ -177,7 +177,7 @@ function Home() {
           </div>
           <div className="md:col-span-7 space-y-5 text-base sm:text-lg leading-relaxed text-muted-foreground">
             <p>
-              Navigating university research, publishing scholarly work, and drafting institutional documents require precision, clarity, and dependable academic guidance. Musembi S. Educational Consultancy works alongside candidates and organizations to meet these standards with confidence.
+              Navigating university research, reviewing scholarly work, and drafting institutional documents require precision, clarity, and dependable academic guidance. Musembi S. Educational Consultancy works alongside candidates and organizations to meet these standards with confidence.
             </p>
             <p>
               Whether you are framing a thesis problem statement, preparing a manuscript for peer review, restructuring an executive CV, or organizing team capacity training, our approach is defined by personalized attention, intellectual integrity, and clear deliverables.

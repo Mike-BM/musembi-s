@@ -9,7 +9,8 @@ export const CONTACT = {
   phoneDisplay: "0794 191 690",
   phoneIntl: "254794191690",
   email: "info.musembisconsultancy@gmail.com",
-  location: "Nairobi, Kenya",
+  location: "Kikima, Kenya",
+  postalAddress: "P.O Box 112-90125 Kikima, Makueni County",
   availability: "Monday – Saturday, 8:00 AM – 6:00 PM EAT",
   responseGuarantee: "Enquiries reviewed within 24 hours",
 };
@@ -32,14 +33,15 @@ export const SERVICES: Service[] = [
     slug: "consultancy-research",
     title: "Educational Consultancy & Research Support",
     category: "Academic & Research",
-    summary: "Comprehensive methodological, structural, and analytical guidance for academic research projects, theses, and dissertations.",
+    summary: "Comprehensive methodological, structural, and analytical guidance for academic research projects, theses, and dissertations, including Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory.",
     deliverables: [
+      "Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory",
       "Research design and conceptual framework formulation",
       "Methodology review and data collection instrument auditing",
       "Chapter-by-chapter critical academic feedback",
       "Defense and viva voce preparation guidance",
     ],
-    audience: "Postgraduate students (Masters/PhD), faculty members, and independent researchers.",
+    audience: "learners, learning institutions, undergraduate students, Postgraduate students (Masters/PhD), faculty members, and independent researchers.",
     icon: GraduationCap,
   },
   {
@@ -151,7 +153,7 @@ export const SERVICES: Service[] = [
       "Assignment breakdown and critical reasoning guidance",
       "Continuous progress tracking and milestone reviews",
     ],
-    audience: "Secondary and tertiary students, adult learners, and early-career researchers.",
+    audience: "junior, senior school and tertiary students, adult learners, and early-career researchers.",
     icon: MonitorPlay,
   },
   {
@@ -220,13 +222,13 @@ export const VALUES: { title: string; subtitle: string; text: string; icon: Luci
 export const AUDIENCES: { title: string; description: string; services: string; icon: LucideIcon }[] = [
   {
     title: "Learners & Students",
-    description: "Navigating coursework, examinations, thesis milestones, and study discipline.",
+    description: "Navigating coursework, examinations, term papers, (which cover most undergraduate academic work), thesis milestones, and study discipline.",
     services: "Online Tutoring · Academic Support · Referencing",
     icon: GraduationCap,
   },
   {
     title: "Researchers & Scholars",
-    description: "Designing studies, structuring dissertations, and publishing peer-reviewed work.",
+    description: "Designing studies, structuring dissertations, and reviewing scholarly work.",
     services: "Research Support · Manuscript Editing · Methodology Audits",
     icon: Microscope,
   },
@@ -427,5 +429,54 @@ export const ARTICLES: Article[] = [
       "The 'Minimum Viable Study Session' technique for demanding workweeks",
       "Setting non-negotiable boundaries with personal and professional commitments",
     ],
+  },
+];
+
+export type Publication = {
+  id: string;
+  title: string;
+  category: "Training Manual" | "Scholarly Article" | "Newsletter";
+  publishedDate: string;
+  readTimeOrPages: string;
+  fileFormat: string;
+  fileSize: string;
+  description: string;
+  topics: string[];
+  downloadUrl?: string;
+};
+
+export const INITIAL_PUBLICATIONS: Publication[] = [
+  {
+    id: "pub-cbc-cbe-manual-2026",
+    title: "Competency-Based Curriculum (CBC) & CBE Implementation Advisory Manual",
+    category: "Training Manual",
+    publishedDate: "October 2026",
+    readTimeOrPages: "48 pages",
+    fileFormat: "PDF",
+    fileSize: "2.4 MB",
+    description: "An operational facilitation and benchmarking manual for junior and senior school educators, curriculum leaders, and institutional administrators in Kenya.",
+    topics: ["CBC Core Competencies", "Formative Assessment Rubrics", "Pedagogical Material Localization"],
+  },
+  {
+    id: "pub-scholarly-dissertation-audit",
+    title: "Scholarly Manuscript & Dissertation Pre-Submission Review Framework",
+    category: "Scholarly Article",
+    publishedDate: "September 2026",
+    readTimeOrPages: "16 pages",
+    fileFormat: "PDF",
+    fileSize: "1.2 MB",
+    description: "Critical review methodologies for postgraduate candidates and academic faculty to verify empirical consistency, ethical boundaries, and citation compliance before formal peer review.",
+    topics: ["Pre-Submission Audits", "Empirical Consistency", "Citation Integrity (APA/Harvard)"],
+  },
+  {
+    id: "pub-advisory-bulletin-q3-2026",
+    title: "Musembi S. Educational Advisory Bulletin — Q3 2026",
+    category: "Newsletter",
+    publishedDate: "August 2026",
+    readTimeOrPages: "8 pages",
+    fileFormat: "PDF",
+    fileSize: "850 KB",
+    description: "Quarterly institutional digest covering contemporary curriculum alignment, research methodology insights, bilingual translation standards, and mentorship updates.",
+    topics: ["Quarterly Editorial Review", "Research Design Insights", "Institutional Capacity Updates"],
   },
 ];

@@ -174,7 +174,7 @@ function TrainingPage() {
               Need a tailored institutional training program?
             </h4>
             <p className="text-xs text-muted-foreground">
-              We design bespoke workshop curricula for universities, secondary schools, NGOs, and corporate teams.
+              We design bespoke workshop curricula for universities, junior and senior schools, NGOs, and corporate teams.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
