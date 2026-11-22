@@ -15,8 +15,12 @@ export const CONTACT = {
   responseGuarantee: "Enquiries reviewed within 24 hours",
 };
 
-export const whatsappLink = (text = "Hello Musembi S. Educational Consultancy, I would like to enquire about your services.") =>
-  `https://wa.me/${CONTACT.phoneIntl}?text=${encodeURIComponent(text)}`;
+export const DEFAULT_WHATSAPP_TEXT = "Hello Musembi S. Educational Consultancy, I would like to enquire about your services.";
+
+export const whatsappUrl = (phoneIntl: string, text = DEFAULT_WHATSAPP_TEXT) =>
+  `https://wa.me/${phoneIntl}?text=${encodeURIComponent(text)}`;
+
+export const whatsappLink = (text = DEFAULT_WHATSAPP_TEXT) => whatsappUrl(CONTACT.phoneIntl, text);
 
 export type Service = {
   slug: string;

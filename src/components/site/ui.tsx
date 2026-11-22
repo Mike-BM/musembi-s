@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode, ComponentProps } from "react";
 import { cn } from "@/lib/utils";
-import { whatsappLink, CONTACT } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 import { Phone, Mail, ArrowRight } from "lucide-react";
 import logoImg from "@/assets/logo.jpeg";
 
@@ -33,9 +33,10 @@ export function WhatsAppButton({
   label?: string; 
   className?: string 
 }) {
+  const { whatsapp } = useSite();
   return (
     <a 
-      href={whatsappLink(text)} 
+      href={whatsapp(text)} 
       target="_blank" 
       rel="noopener noreferrer" 
       className={cn(btn.whatsapp, className)}
@@ -138,6 +139,7 @@ export function CtaBand({
   text?: string;
   button?: string;
 }) {
+  const { contact: CONTACT } = useSite();
   return (
     <section className="container-site py-16 sm:py-20 lg:py-24">
       <div className="relative overflow-hidden rounded-xl border border-primary/20 bg-primary-deep px-6 py-12 text-primary-foreground sm:px-12 sm:py-16 lg:px-16">

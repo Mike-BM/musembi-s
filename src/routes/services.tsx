@@ -3,7 +3,8 @@ import { useState } from "react";
 import { PageHero, SectionHeading, WhatsAppButton, btn } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
-import { SERVICES, SERVICE_CATEGORIES, type Service } from "@/lib/site";
+import { SERVICE_CATEGORIES, type Service } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 import { BookOpen, FileCheck, Languages, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/services")({
 });
 
 function ServicesPage() {
+  const { services: SERVICES } = useSite();
   const [activeTab, setActiveTab] = useState<typeof SERVICE_CATEGORIES[number]>("All Services");
 
   const filteredServices = activeTab === "All Services"

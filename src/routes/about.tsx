@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ShieldCheck, Award, HeartHandshake, Compass, BookOpen, Target, Eye } from "lucide-react";
 import { PageHero, SectionHeading, CtaBand, btn } from "@/components/site/ui";
-import { VALUES, CONTACT } from "@/lib/site";
+import { VALUES } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+  const { contact: CONTACT } = useSite();
   return (
     <>
       <PageHero

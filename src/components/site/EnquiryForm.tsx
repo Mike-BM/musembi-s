@@ -2,7 +2,9 @@ import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Send, CheckCircle2, ShieldCheck, MessageSquare, Mail, Phone } from "lucide-react";
-import { SERVICES, CONTACT, whatsappLink } from "@/lib/site";
+import { useServerFn } from "@tanstack/react-start";
+import { useSite } from "@/lib/portal/context";
+import { submitEnquiry } from "@/lib/portal/api";
 import { Field, Input, inputCls, btn } from "./ui";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +21,7 @@ const schema = z.object({
 
 export type Enquiry = z.infer<typeof schema>;
 
-function deliver(e: Enquiry) {
+function deliver(e: Enquiry, contactEmail: string, whatsappLink: (text?: string) => string) {
   const body = [
     `*NEW CONSULTATION ENQUIRY*`,
     `--------------------------------`,
@@ -37,7 +39,7 @@ function deliver(e: Enquiry) {
   if (e.contactMethod === "WhatsApp") {
     window.open(whatsappLink(body), "_blank", "noopener");
   } else {
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(`Consultation Enquiry: ${e.service} — ${e.name}`)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(`Consultation Enquiry: ${e.service} — ${e.name}`)}&body=${encodeURIComponent(body)}`;
   }
 }
 
@@ -48,6 +50,8 @@ export function EnquiryForm({
   defaultService?: string;
   submitLabel?: string;
 }) {
+  const { contact: CONTACT, services: SERVICES, whatsapp } = useSite();
+  const saveEnquiry = useServerFn(submitEnquiry);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [method, setMethod] = useState<Enquiry["contactMethod"]>("WhatsApp");
   const [submitted, setSubmitted] = useState(false);
@@ -64,7 +68,9 @@ export function EnquiryForm({
     }
 
     setErrors({});
-    deliver(res.data);
+    // Keep a record in the admin portal. This never blocks or breaks the WhatsApp / email hand-off.
+    void saveEnquiry({ data: { ...res.data, website: String(data["website"] ?? "") } }).catch(() => undefined);
+    deliver(res.data, CONTACT.email, whatsapp);
     setSubmitted(true);
     toast.success("Thank you. Your enquiry is prepared and opening now.");
     ev.currentTarget.reset();
@@ -79,6 +85,13 @@ export function EnquiryForm({
   return (
     <div className="space-y-6">
       <form onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
+        {/* Honeypot for spam bots: hidden from people, so only automated forms fill it in */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label>
+            Website
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+          </label>
+        </div>
         <Field label="Full Name *" id="name">
           <Input 
             id="name" 

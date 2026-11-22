@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Phone, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, MessageSquare } from "lucide-react";
 import { PageHero, WhatsAppIcon, btn } from "@/components/site/ui";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
-import { CONTACT, whatsappLink } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { contact: CONTACT, whatsapp: whatsappLink } = useSite();
   const { service } = Route.useSearch();
 
   return (

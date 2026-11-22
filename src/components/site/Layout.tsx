@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CONTACT, SERVICES, whatsappLink } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 import { LogoMark, btn, WhatsAppButton } from "./ui";
 import logoImg from "@/assets/logo.jpeg";
 
@@ -59,6 +59,7 @@ function Brand({ light }: { light?: boolean }) {
 }
 
 export function SiteHeader() {
+  const { contact: CONTACT } = useSite();
   const [open, setOpen] = useState(false);
   const routerState = useRouterState();
 
@@ -173,6 +174,7 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const { contact: CONTACT } = useSite();
   return (
     <footer className="border-t border-border/40 bg-primary-deep text-white">
       <div className="container-site grid gap-12 py-16 sm:py-20 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr]">

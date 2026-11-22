@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -14,6 +15,8 @@ import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site/Layout";
+import { PortalProvider } from "@/lib/portal/context";
+import { getPortalContent } from "@/lib/portal/api";
 
 function NotFoundComponent() {
   return (
@@ -52,6 +55,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => getPortalContent(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -97,6 +101,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const content = Route.useLoaderData();
+  const isAdminArea = useRouterState({ select: (st) => st.location.pathname.startsWith("/admin") });
 
   // Actively remove any dynamically injected Lovable badge from the DOM
   useEffect(() => {
@@ -116,12 +122,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteHeader />
-      <main>
-        <Outlet />
-      </main>
-      <SiteFooter />
-      <Toaster position="top-center" richColors />
+      <PortalProvider content={content}>
+        {isAdminArea ? (
+          <Outlet />
+        ) : (
+          <>
+            <SiteHeader />
+            <main>
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </>
+        )}
+        <Toaster position="top-center" richColors />
+      </PortalProvider>
     </QueryClientProvider>
   );
 }

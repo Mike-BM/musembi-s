@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ShieldCheck, Award, BookOpen, Users, Clock, Phone, MapPin } from "lucide-react";
 import logoImg from "@/assets/logo.jpeg";
-import { SERVICES, VALUES, AUDIENCES, CONTACT, whatsappLink } from "@/lib/site";
+import { VALUES, AUDIENCES } from "@/lib/site";
+import { useSite } from "@/lib/portal/context";
 import { btn, SectionHeading, CtaBand, WhatsAppIcon } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { contact: CONTACT, services: SERVICES, whatsapp: whatsappLink } = useSite();
   return (
     <>
       {/* 1. HERO SECTION */}
