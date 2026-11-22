@@ -128,30 +128,3 @@
 @utility animate-rise { 
   animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; 
 }
-
-/* 
- * Suppress Lovable platform watermark / badge 
- */
-#lovable-badge,
-aside#lovable-badge,
-#lovable-badge-cta,
-#lovable-badge-text,
-#lovable-badge-divider,
-#lovable-badge-close,
-[id^="lovable-badge"],
-[class*="lovable-badge"],
-[data-lovable-badge],
-a[href*="lovable.dev"],
-aside:has(a[href*="lovable.dev"]),
-div:has(> a[href*="lovable.dev"]) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  position: absolute !important;
-  clip: rect(0, 0, 0, 0) !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-}

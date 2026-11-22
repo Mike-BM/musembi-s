@@ -9,11 +9,10 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site/Layout";
 import { PortalProvider } from "@/lib/portal/context";
 import { getPortalContent } from "@/lib/portal/api";
@@ -36,9 +35,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -84,12 +80,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
-        <style
-          dangerouslySetInnerHTML={{
-            __html:
-              "#lovable-badge, aside#lovable-badge, [id^='lovable-badge'], [class*='lovable-badge'] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }",
-          }}
-        />
       </head>
       <body>
         {children}
@@ -103,22 +93,6 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const content = Route.useLoaderData();
   const isAdminArea = useRouterState({ select: (st) => st.location.pathname.startsWith("/admin") });
-
-  // Actively remove any dynamically injected Lovable badge from the DOM
-  useEffect(() => {
-    const purgeLovableBadge = () => {
-      const candidates = document.querySelectorAll(
-        "#lovable-badge, aside#lovable-badge, [id^='lovable-badge'], [class*='lovable-badge'], [data-lovable-badge]"
-      );
-      candidates.forEach((el) => el.remove());
-    };
-
-    purgeLovableBadge();
-    const observer = new MutationObserver(purgeLovableBadge);
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
