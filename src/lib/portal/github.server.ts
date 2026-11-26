@@ -5,7 +5,6 @@
  * Why a separate branch: saving on the main branch would rebuild the live site on every enquiry.
  * The branch holds only data, never code.
  */
-const API = "https://api.github.com";
 
 export function env(name: string): string | undefined {
   try {
@@ -18,6 +17,9 @@ export function env(name: string): string | undefined {
 
 export class ConflictError extends Error {}
 export class StorageError extends Error {}
+
+/** GITHUB_API_URL exists only so the storage can be tested against a local stand-in; leave it unset in production. */
+const apiBase = () => env("GITHUB_API_URL") ?? "https://api.github.com";
 
 function cfg() {
   return {
@@ -34,7 +36,7 @@ export function storageConfigured(): boolean {
 function gh(path: string, init: RequestInit = {}, accept = "application/vnd.github+json") {
   const { token } = cfg();
   if (!token) throw new StorageError("Storage is not connected: GITHUB_TOKEN is missing.");
-  return fetch(`${API}${path}`, {
+  return fetch(`${apiBase()}${path}`, {
     ...init,
     headers: {
       Authorization: `Bearer ${token}`,
