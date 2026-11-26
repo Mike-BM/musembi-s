@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, CtaBand, SectionHeading } from "@/components/site/ui";
 import { Section, Prose, H3 } from "@/components/site/blocks";
 import { VALUES } from "@/lib/site";
+import founderImg from "@/assets/samuel-musembi.jpg";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
@@ -69,10 +70,25 @@ function AboutPage() {
             <h2 className="pt-4 font-display text-2xl text-primary-deep">Where we operate</h2>
             <p>The Consultancy is based in Kikima Town, Mbooni West Sub-County, Makueni County, Kenya. Services may be delivered in person by arrangement, online and through appropriate institutional or community partnerships. Support outside Kenya may be arranged where suitable and legally permitted.</p>
           </Prose>
-          <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
-            <h2 className="font-display text-2xl text-primary-deep">Founder and leadership</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Samuel Musembi is the Founder and Director/CEO of Musembi S. Educational Consultancy. He provides leadership and direction for the Consultancy’s work and its commitment to educational support, mentorship, research, professional services and responsible practice.</p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">With over three years of experience offering educational, linguistic and professional services, he brings together classroom teaching experience, Competency-Based Education (CBE/CBC) practice, data-driven research support, technical writing and bilingual communication. His approach is grounded in the belief that education should go beyond syllabus coverage to build measurable understanding, digital competence, critical thinking and lifelong capabilities.</p>
+          <div className="overflow-hidden rounded-lg border border-border bg-card">
+            <div className="grid gap-0 sm:grid-cols-[14rem_1fr]">
+              <figure className="bg-secondary/40 sm:h-full">
+                <img
+                  src={founderImg}
+                  alt="Samuel Musembi, Founder and Director/CEO of Musembi S. Educational Consultancy"
+                  width={720}
+                  height={720}
+                  loading="lazy"
+                  className="aspect-square w-full object-cover object-top sm:aspect-auto sm:h-full"
+                />
+              </figure>
+              <div className="p-6 sm:p-8">
+                <h2 className="font-display text-2xl text-primary-deep">Founder and leadership</h2>
+                <p className="mt-1 text-sm font-semibold text-primary">Samuel Musembi · Founder and Director/CEO</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Samuel Musembi is the Founder and Director/CEO of Musembi S. Educational Consultancy. He provides leadership and direction for the Consultancy’s work and its commitment to educational support, mentorship, research, professional services and responsible practice.</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">With over three years of experience offering educational, linguistic and professional services, he brings together classroom teaching experience, Competency-Based Education (CBE/CBC) practice, data-driven research support, technical writing and bilingual communication. His approach is grounded in the belief that education should go beyond syllabus coverage to build measurable understanding, digital competence, critical thinking and lifelong capabilities.</p>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
