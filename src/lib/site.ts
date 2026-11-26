@@ -1,31 +1,46 @@
 import {
-  GraduationCap, PenLine, FileText, FolderOpen, IdCard, MonitorPlay,
-  BookOpenCheck, Languages, Newspaper, Presentation, Award, ShieldCheck,
-  Lock, HeartHandshake, Lightbulb, Clock, Users, Microscope, Briefcase,
-  Building2, CheckCircle2, type LucideIcon,
+  GraduationCap, PenLine, BookOpen, HeartHandshake, Users, ClipboardCheck, Microscope,
+  Briefcase, Languages, MonitorPlay, Presentation, Network, Leaf, Compass, Award,
+  ShieldCheck, Lightbulb, Sparkles, Globe2, type LucideIcon,
 } from "lucide-react";
+
+export const BRAND = {
+  name: "Musembi S. Educational Consultancy",
+  short: "Musembi S.",
+  tagline: "Unlocking Potential, Shaping Futures",
+  strapline: "Empowering learners, supporting educators and advancing educational excellence.",
+};
 
 export const CONTACT = {
   phoneDisplay: "0794 191 690",
   phoneIntl: "254794191690",
   email: "info.musembisconsultancy@gmail.com",
-  location: "Kikima, Kenya",
-  postalAddress: "P.O Box 112-90125 Kikima, Makueni County",
-  availability: "Monday – Saturday, 8:00 AM – 6:00 PM EAT",
-  responseGuarantee: "Enquiries reviewed within 24 hours",
+  location: "Kikima Town, Mbooni West Sub-County, Makueni County, Kenya",
+  postalAddress: "P.O. Box 112-90125, Kikima, Kenya",
+  availability: "Monday–Saturday, 8:00 AM–6:00 PM EAT",
+  responseGuarantee: "We aim to review and respond within 24 business hours.",
 };
 
-export const DEFAULT_WHATSAPP_TEXT = "Hello Musembi S. Educational Consultancy, I would like to enquire about your services.";
+export const DEFAULT_WHATSAPP_TEXT = "Hello Musembi S. Educational Consultancy. I would like to enquire about your services.";
 
 export const whatsappUrl = (phoneIntl: string, text = DEFAULT_WHATSAPP_TEXT) =>
   `https://wa.me/${phoneIntl}?text=${encodeURIComponent(text)}`;
 
 export const whatsappLink = (text = DEFAULT_WHATSAPP_TEXT) => whatsappUrl(CONTACT.phoneIntl, text);
 
+export const SERVICE_CATEGORIES = [
+  "All Services",
+  "Learning & Mentorship",
+  "Consultancy & Curriculum",
+  "Research & Professional",
+  "Content & Digital Learning",
+  "Training & Community",
+] as const;
+
 export type Service = {
   slug: string;
   title: string;
-  category: "Academic & Research" | "Documentation & Career" | "Linguistic Services" | "Mentorship & Training";
+  category: Exclude<(typeof SERVICE_CATEGORIES)[number], "All Services">;
   summary: string;
   deliverables: string[];
   audience: string;
@@ -34,320 +49,167 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    slug: "consultancy-research",
-    title: "Educational Consultancy & Research Support",
-    category: "Academic & Research",
-    summary: "Comprehensive methodological, structural, and analytical guidance for academic research projects, theses, and dissertations, including Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory.",
-    deliverables: [
-      "Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory",
-      "Research design and conceptual framework formulation",
-      "Methodology review and data collection instrument auditing",
-      "Chapter-by-chapter critical academic feedback",
-      "Defense and viva voce preparation guidance",
-    ],
-    audience: "learners, learning institutions, undergraduate students, Postgraduate students (Masters/PhD), faculty members, and independent researchers.",
-    icon: GraduationCap,
+    slug: "educational-consultancy",
+    title: "Educational consultancy",
+    category: "Consultancy & Curriculum",
+    summary: "Educational guidance and advisory support for learners, parents, educators, schools and institutions. This may include learning needs, educational planning, teaching and learning improvement, institutional priorities and education-related projects.",
+    deliverables: ["Guidance on learning needs", "Educational planning", "Teaching and learning improvement", "Support with institutional priorities and education-related projects"],
+    audience: "Learners, parents, educators, schools and institutions",
+    icon: Compass,
   },
   {
-    slug: "academic-writing",
-    title: "Academic Writing & Editing",
-    category: "Academic & Research",
-    summary: "Meticulous substantive editing, proofreading, and stylistic polishing of scholarly manuscripts, journal submissions, and theses.",
-    deliverables: [
-      "Rigorous grammatical, syntactic, and structural copyediting",
-      "Scholarly tone alignment and clarity enhancement",
-      "Citation and reference list compliance (APA, Harvard, Chicago, MLA)",
-      "Comprehensive tracked-changes file with editor's notes",
-    ],
-    audience: "Scholars, university researchers, and postgraduates preparing manuscripts for submission.",
-    icon: PenLine,
+    slug: "tuition-learning-support",
+    title: "Tuition and learning support",
+    category: "Learning & Mentorship",
+    summary: "Online and in-person tutorials, remedial learning, revision programmes, academic coaching, study guidance, academic planning and learner development. Sessions are planned around the learner’s needs and agreed learning goals.",
+    deliverables: ["Online and in-person tutorials", "Remedial learning and revision programmes", "Academic coaching and study guidance", "Academic planning and learner development"],
+    audience: "Learners, students, parents and guardians",
+    icon: BookOpen,
   },
   {
-    slug: "proposals",
-    title: "Reports, Concept Notes & Proposal Writing",
-    category: "Academic & Research",
-    summary: "Clear, persuasive, and structured development of institutional project reports, grant concept notes, and funding proposals.",
-    deliverables: [
-      "Problem statement and theory of change structuring",
-      "Project outcome and indicator mapping (Logframes / M&E matrices)",
-      "Executive summaries and policy brief drafting",
-      "Compliance review against donor or institutional terms of reference",
-    ],
-    audience: "NGO project managers, academic departments, researchers, and educational non-profits.",
-    icon: FileText,
-  },
-  {
-    slug: "academic-support",
-    title: "Academic Support Services",
-    category: "Academic & Research",
-    summary: "Personalized assistance with complex academic coursework, project organization, and rigorous reference management.",
-    deliverables: [
-      "Coursework structure planning and literature search strategy",
-      "Reference management system setup (Mendeley / Zotero guidance)",
-      "Academic presentation and slide deck refinement",
-      "Plagiarism prevention and originality auditing guidance",
-    ],
-    audience: "Undergraduate and postgraduate students seeking to elevate coursework rigor.",
-    icon: BookOpenCheck,
-  },
-  {
-    slug: "cv-writing",
-    title: "CV Writing & Review Services",
-    category: "Documentation & Career",
-    summary: "Strategic crafting and restructuring of academic curricula vitae, executive resumes, and professional career portfolios.",
-    deliverables: [
-      "Targeted academic CV or professional executive resume",
-      "Compelling personal statement / Cover letter alignment",
-      "LinkedIn profile audit and optimization recommendations",
-      "Applicant Tracking System (ATS) readability formatting",
-    ],
-    audience: "Graduates, mid-career professionals, university faculty, and executive job candidates.",
-    icon: IdCard,
-  },
-  {
-    slug: "documentation",
-    title: "Documentation Services",
-    category: "Documentation & Career",
-    summary: "End-to-end preparation, formatting, standardization, and quality auditing of institutional manuals, policies, and formal reports.",
-    deliverables: [
-      "Standard Operating Procedures (SOPs) and policy documentation",
-      "Document typography, pagination, and layout standardization",
-      "Institutional handbooks and internal review documentation",
-      "Print-ready and digital archive-ready file preparation",
-    ],
-    audience: "Schools, colleges, corporate training units, and non-governmental bodies.",
-    icon: FolderOpen,
-  },
-  {
-    slug: "content",
-    title: "Professional Writing & Content Development",
-    category: "Documentation & Career",
-    summary: "High-level editorial development for educational articles, organizational thought leadership, white papers, and newsletters.",
-    deliverables: [
-      "Well-researched educational articles and op-eds",
-      "White papers and educational briefing notes",
-      "Institutional newsletters and stakeholder communications",
-      "Web content and program brochures tailored to academic audiences",
-    ],
-    audience: "Educational institutions, think tanks, researchers, and professional associations.",
-    icon: Newspaper,
-  },
-  {
-    slug: "translation",
-    title: "English ↔ Kiswahili Translation Services",
-    category: "Linguistic Services",
-    summary: "Accurate, culturally nuanced, and context-sensitive translation and localization of academic, legal, and educational texts.",
-    deliverables: [
-      "Context-accurate bidirectional translation (English to Kiswahili / Kiswahili to English)",
-      "Localization of research instruments, questionnaires, and consent forms",
-      "Community educational brochures and sensitization materials",
-      "Certified translation review for academic documentation",
-    ],
-    audience: "Field researchers, humanitarian organizations, educational bodies, and publishers.",
-    icon: Languages,
-  },
-  {
-    slug: "tutoring",
-    title: "Online Tutoring & Mentorship",
-    category: "Mentorship & Training",
-    summary: "Direct, one-to-one virtual academic tutoring, study methodology coaching, and personalized intellectual mentorship.",
-    deliverables: [
-      "Diagnostic learning assessment and custom study roadmap",
-      "Scheduled interactive 1-on-1 virtual sessions (Google Meet / Zoom)",
-      "Assignment breakdown and critical reasoning guidance",
-      "Continuous progress tracking and milestone reviews",
-    ],
-    audience: "junior, senior school and tertiary students, adult learners, and early-career researchers.",
-    icon: MonitorPlay,
-  },
-  {
-    slug: "training",
-    title: "Training & Capacity Building",
-    category: "Mentorship & Training",
-    summary: "Interactive workshops, institutional faculty seminars, and specialized skill-building modules for teams and organizations.",
-    deliverables: [
-      "Custom syllabus and practical workshop materials",
-      "Interactive training facilitation (online or on-site in Kenya)",
-      "Pre- and post-training participant capability assessments",
-      "Actionable toolkit and reference guide for ongoing application",
-    ],
-    audience: "Educational institutions, academic faculties, NGO project teams, and professional bodies.",
-    icon: Presentation,
-  },
-];
-
-export const SERVICE_CATEGORIES = [
-  "All Services",
-  "Academic & Research",
-  "Documentation & Career",
-  "Linguistic Services",
-  "Mentorship & Training",
-] as const;
-
-export const VALUES: { title: string; subtitle: string; text: string; icon: LucideIcon }[] = [
-  {
-    title: "Professional Excellence",
-    subtitle: "High academic standards",
-    text: "Every consultation, review, and document is held to exacting academic and professional standards with zero shortcuts.",
-    icon: Award,
-  },
-  {
-    title: "Quality & Accuracy",
-    subtitle: "Meticulous verification",
-    text: "Rigorous attention to detail, precision in factual referencing, and thorough linguistic validation in every deliverable.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Integrity & Confidentiality",
-    subtitle: "Strict ethical boundaries",
-    text: "Your research data, intellectual property, and personal drafts remain strictly confidential. We support original scholarship ethically.",
-    icon: Lock,
-  },
-  {
-    title: "Client-Centred Guidance",
-    subtitle: "Tailored to your timeline",
-    text: "We meet you where you are—adapting our guidance to your academic stage, institutional requirements, and deadlines.",
+    slug: "mentorship-guidance",
+    title: "Mentorship and guidance",
+    category: "Learning & Mentorship",
+    summary: "Academic, personal, career and professional mentorship focusing on goal-setting, study habits, confidence, decision-making, career direction and independent learning skills.",
+    deliverables: ["Goal-setting", "Study habits and independent learning skills", "Confidence and decision-making", "Career direction"],
+    audience: "Learners, graduates and young professionals",
     icon: HeartHandshake,
   },
   {
-    title: "Methodological Rigor",
-    subtitle: "Evidence-based practice",
-    text: "We apply established academic methodologies and current research conventions to build durable intellectual capability.",
-    icon: Lightbulb,
+    slug: "teacher-support",
+    title: "Teacher support and professional development",
+    category: "Consultancy & Curriculum",
+    summary: "Professional development, lesson-planning support, assessment support, instructional design, teaching resources, pedagogical guidance, digital learning and capacity-building programmes.",
+    deliverables: ["Lesson-planning and assessment support", "Instructional design and teaching resources", "Pedagogical guidance", "Digital learning and capacity-building programmes"],
+    audience: "Teachers, tutors and education professionals",
+    icon: Users,
   },
   {
-    title: "Dependable Delivery",
-    subtitle: "Clear commitments",
-    text: "Transparent turnaround times, dependable communication, and structured milestones you can rely on with confidence.",
-    icon: Clock,
-  },
-];
-
-export const AUDIENCES: { title: string; description: string; services: string; icon: LucideIcon }[] = [
-  {
-    title: "Learners & Students",
-    description: "Navigating coursework, examinations, term papers, (which cover most undergraduate academic work), thesis milestones, and study discipline.",
-    services: "Online Tutoring · Academic Support · Referencing",
-    icon: GraduationCap,
+    slug: "curriculum-cbc-cbe",
+    title: "Curriculum, CBC/CBE and assessment support",
+    category: "Consultancy & Curriculum",
+    summary: "Support in curriculum implementation, Competency-Based Curriculum (CBC), Competency-Based Education (CBE), assessment practices and instructional improvement, with an emphasis on practical understanding and application.",
+    deliverables: ["Curriculum implementation support", "CBC and CBE guidance", "Assessment practices", "Instructional improvement"],
+    audience: "Teachers, schools and learning institutions",
+    icon: ClipboardCheck,
   },
   {
-    title: "Researchers & Scholars",
-    description: "Designing studies, structuring dissertations, and reviewing scholarly work.",
-    services: "Research Support · Manuscript Editing · Methodology Audits",
+    slug: "research-academic-support",
+    title: "Research and academic support",
+    category: "Research & Professional",
+    summary: "Research-methodology guidance, research planning, surveys, needs assessments, data collection and analysis support, monitoring and evaluation, academic feedback, proofreading, editing and referencing guidance.",
+    deliverables: ["Research-methodology guidance and planning", "Surveys, needs assessments, and data collection and analysis support", "Monitoring and evaluation", "Academic feedback, proofreading, editing and referencing guidance"],
+    audience: "Researchers, scholars, writers and students",
     icon: Microscope,
   },
   {
-    title: "Educators & Tutors",
-    description: "Enhancing pedagogical materials, instructional clarity, and academic content.",
-    services: "Content Development · Curriculum Reviews · Training",
-    icon: BookOpenCheck,
-  },
-  {
-    title: "Professionals & Executives",
-    description: "Advancing career opportunities, executive proposals, and high-stakes documents.",
-    services: "CV & Portfolio Writing · Concept Notes · Professional Editing",
+    slug: "career-professional",
+    title: "Career and professional services",
+    category: "Research & Professional",
+    summary: "CV writing and review, cover letters, professional statements, proposals, LinkedIn profile support, professional portfolios, career guidance, interview preparation and employability support.",
+    deliverables: ["CV writing and review", "Cover letters and professional statements", "LinkedIn profile support and professional portfolios", "Career guidance, interview preparation and employability support"],
+    audience: "Graduates, job seekers and working professionals",
     icon: Briefcase,
   },
   {
-    title: "Institutions & NGOs",
-    description: "Building team capability, standardizing documentation, and localizing materials.",
-    services: "Capacity Building Workshops · Documentation · Translation",
-    icon: Building2,
-  },
-];
-
-export type Programme = {
-  id: string;
-  title: string;
-  tagline: string;
-  targetAudience: string;
-  format: string;
-  duration: string;
-  learningOutcomes: string[];
-  icon: LucideIcon;
-};
-
-export const PROGRAMMES: Programme[] = [
-  {
-    id: "research-thesis-mastery",
-    title: "Academic Research & Thesis Development",
-    tagline: "Structured guidance from concept note to defended dissertation.",
-    targetAudience: "Masters & PhD candidates, independent researchers",
-    format: "1-on-1 Mentorship & Small Cohort Seminars",
-    duration: "4 to 8 weeks (Modular)",
-    learningOutcomes: [
-      "Formulating clear, testable research questions and conceptual frameworks",
-      "Conducting rigorous, systematic literature reviews",
-      "Selecting and justifying quantitative or qualitative methodologies",
-      "Structuring thesis chapters in compliance with university standards",
-      "Anticipating examiner questions and preparing for oral defenses",
-    ],
-    icon: Microscope,
+    slug: "language-services",
+    title: "Language services",
+    category: "Research & Professional",
+    summary: "English–Kiswahili and Kiswahili–English translation, proofreading, editing and interpretation support. Work is handled with attention to accuracy, context, meaning and intended audience.",
+    deliverables: ["English–Kiswahili and Kiswahili–English translation", "Proofreading and editing", "Interpretation support"],
+    audience: "Individuals, institutions and organisations",
+    icon: Languages,
   },
   {
-    id: "scholarly-writing-publishing",
-    title: "Scholarly Writing & Journal Publishing",
-    tagline: "Bridging the gap between raw research findings and published papers.",
-    targetAudience: "Early-career academics, university lecturers, postgraduates",
-    format: "Hands-on Workshop & Manuscript Coaching",
-    duration: "3 weeks intensive or weekend cohort",
-    learningOutcomes: [
-      "Mastering academic tone, precision, and active/passive voice conventions",
-      "Navigating journal scope, author guidelines, and indexing standards",
-      "Handling peer review feedback and drafting persuasive response letters",
-      "Eliminating accidental citation errors and ethical publishing pitfalls",
-    ],
+    slug: "content-resource-development",
+    title: "Content and learning-resource development",
+    category: "Content & Digital Learning",
+    summary: "Educational articles, study guides, teaching and learning materials, modules, training materials, digital resources and e-learning content for learners, educators and institutions.",
+    deliverables: ["Educational articles and study guides", "Teaching and learning materials and modules", "Training materials", "Digital resources and e-learning content"],
+    audience: "Learners, educators and institutions",
     icon: PenLine,
   },
   {
-    id: "proposal-grant-writing",
-    title: "Project Proposals & Concept Notes",
-    tagline: "Developing persuasive, fundable proposals for programs and research.",
-    targetAudience: "NGO officers, program managers, institutional researchers",
-    format: "Interactive Group Seminar or Institutional Training",
-    duration: "2-day intensive or 4-week evening track",
-    learningOutcomes: [
-      "Framing acute problem statements backed by verifiable baseline data",
-      "Designing logical frameworks (Logframes) and monitoring indicators",
-      "Drafting transparent project budgets and implementation schedules",
-      "Aligning proposals with donor priorities and evaluation rubrics",
-    ],
-    icon: FileText,
+    slug: "digital-learning",
+    title: "Digital learning and educational technology",
+    category: "Content & Digital Learning",
+    summary: "Digital literacy, ICT-integrated teaching and learning, educational technology support, e-learning resources and practical digital learning solutions.",
+    deliverables: ["Digital literacy", "ICT-integrated teaching and learning", "Educational technology support", "E-learning resources and practical digital learning solutions"],
+    audience: "Learners, educators and institutions",
+    icon: MonitorPlay,
   },
   {
-    id: "professional-cv-career",
-    title: "Academic CV & Executive Career Positioning",
-    tagline: "Presenting your scholarly and professional trajectory with distinction.",
-    targetAudience: "Job seekers, fellowship applicants, mid-career professionals",
-    format: "Personal 1-on-1 Consultation & Drafting",
-    duration: "3 to 5 business days",
-    learningOutcomes: [
-      "Differentiating between academic CVs and corporate resumes",
-      "Crafting compelling Statements of Purpose (SOP) and motivation letters",
-      "Positioning publications, grants, and teaching portfolios effectively",
-      "Preparing for high-stakes academic and panel interviews",
-    ],
-    icon: Briefcase,
+    slug: "workshops-training",
+    title: "Workshops and training",
+    category: "Training & Community",
+    summary: "Workshops, seminars, short courses and tailored training programmes for learners, educators, professionals, institutions and community groups.",
+    deliverables: ["Workshops and seminars", "Short courses", "Tailored training programmes"],
+    audience: "Learners, educators, professionals, institutions and community groups",
+    icon: Presentation,
   },
   {
-    id: "bilingual-translation-practice",
-    title: "Bilingual Academic & Field Translation (English ↔ Kiswahili)",
-    tagline: "Linguistic accuracy and cultural fidelity in field research and documentation.",
-    targetAudience: "Field enumerators, research assistants, community facilitators",
-    format: "Practical Training Workshop",
-    duration: "2-day workshop",
-    learningOutcomes: [
-      "Standardizing academic and technical terminology in Kiswahili",
-      "Translating informed consent forms and survey instruments accurately",
-      "Preserving semantic nuance and cultural appropriateness in community research",
-    ],
-    icon: Languages,
+    slug: "educational-projects",
+    title: "Educational projects and partnerships",
+    category: "Training & Community",
+    summary: "Support for the design, coordination, implementation, monitoring and evaluation of educational projects and collaborative learning initiatives.",
+    deliverables: ["Project design and coordination", "Implementation support", "Monitoring and evaluation of educational projects"],
+    audience: "Schools, institutions, community groups and organisations",
+    icon: Network,
   },
+  {
+    slug: "environmental-education",
+    title: "Environmental education and sustainability",
+    category: "Training & Community",
+    summary: "Environmental awareness, climate-change and resilience education, conservation learning, tree-growing, waste-management awareness, environmental clubs and community sustainability programmes.",
+    deliverables: ["Climate-change and resilience education", "Conservation learning and tree-growing", "Waste-management awareness and environmental clubs", "Community sustainability programmes"],
+    audience: "Schools, learners, community groups and organisations",
+    icon: Leaf,
+  },
+];
+
+export const ACADEMIC_INTEGRITY =
+  "Our academic support is intended to strengthen learning, understanding and independent capability. We provide tutoring, guidance, feedback, research-methodology support, editing, proofreading and referencing assistance. We do not complete examinations for learners or produce academic work for dishonest submission as another person’s independent work. Clients remain responsible for their own academic decisions, original contributions and compliance with their institutions’ rules.";
+
+export const VALUES: { title: string; text: string; icon: LucideIcon }[] = [
+  { title: "Excellence", text: "We strive for high standards and continuously seek to improve the quality and impact of our services.", icon: Award },
+  { title: "Integrity", text: "We act honestly, fairly and transparently, and take responsibility for our commitments and actions.", icon: ShieldCheck },
+  { title: "Innovation", text: "We welcome creative ideas, modern teaching approaches and technology that improve learning and educational outcomes.", icon: Lightbulb },
+  { title: "Empowerment", text: "We equip people with knowledge, skills, confidence and opportunities to become more capable and independent.", icon: Sparkles },
+  { title: "Inclusivity", text: "We respect diversity and seek to make our services accessible and responsive to different needs and circumstances.", icon: Globe2 },
+];
+
+export const AUDIENCES = [
+  "Learners, students, parents and guardians",
+  "Teachers, tutors and education professionals",
+  "Researchers, scholars and writers",
+  "Graduates, job seekers and working professionals",
+  "Schools, learning institutions, community groups and organisations",
+];
+
+export const TRAINING_AREAS = [
+  "Teacher professional development, pedagogy and instructional improvement.",
+  "Lesson planning, curriculum and assessment, including CBC/CBE.",
+  "Research skills, research methodology and evidence-informed practice.",
+  "Digital literacy, educational technology and digital learning.",
+  "Academic skills, study strategies and learner development.",
+  "Career development, employability and professional documentation.",
+  "Environmental education, climate-change awareness, resilience and sustainability.",
+  "Community learning, environmental clubs and responsible resource use.",
 ];
 
 export type Article = {
   slug: string;
-  category: "Research Methodology" | "Academic Writing" | "Career & Documentation" | "Study Skills";
+  category:
+    | "Teaching & Learning"
+    | "Study & Examination Guidance"
+    | "CBC/CBE"
+    | "Research Methodology"
+    | "Academic Writing"
+    | "Career & Documentation"
+    | "Study Skills"
+    | "Professional Development"
+    | "Digital Learning"
+    | "Environmental Education";
   title: string;
   excerpt: string;
   readTime: string;
@@ -439,13 +301,16 @@ export const ARTICLES: Article[] = [
 export type Publication = {
   id: string;
   title: string;
-  category: "Training Manual" | "Scholarly Article" | "Newsletter";
+  category: "Study Guide" | "Teaching Material" | "Training Manual" | "Scholarly Article" | "Newsletter" | "Handbook";
   publishedDate: string;
   readTimeOrPages: string;
   fileFormat: string;
   fileSize: string;
   description: string;
   topics: string[];
+  subject?: string;
+  level?: string;
+  audience?: string;
   downloadUrl?: string;
 };
 
@@ -460,6 +325,9 @@ export const INITIAL_PUBLICATIONS: Publication[] = [
     fileSize: "2.4 MB",
     description: "An operational facilitation and benchmarking manual for junior and senior school educators, curriculum leaders, and institutional administrators in Kenya.",
     topics: ["CBC Core Competencies", "Formative Assessment Rubrics", "Pedagogical Material Localization"],
+    subject: "CBC/CBE",
+    level: "Junior & Senior School",
+    audience: "Educators",
   },
   {
     id: "pub-scholarly-dissertation-audit",
@@ -471,6 +339,9 @@ export const INITIAL_PUBLICATIONS: Publication[] = [
     fileSize: "1.2 MB",
     description: "Critical review methodologies for postgraduate candidates and academic faculty to verify empirical consistency, ethical boundaries, and citation compliance before formal peer review.",
     topics: ["Pre-Submission Audits", "Empirical Consistency", "Citation Integrity (APA/Harvard)"],
+    subject: "Research",
+    level: "Postgraduate",
+    audience: "Researchers",
   },
   {
     id: "pub-advisory-bulletin-q3-2026",
@@ -482,5 +353,7 @@ export const INITIAL_PUBLICATIONS: Publication[] = [
     fileSize: "850 KB",
     description: "Quarterly institutional digest covering contemporary curriculum alignment, research methodology insights, bilingual translation standards, and mentorship updates.",
     topics: ["Quarterly Editorial Review", "Research Design Insights", "Institutional Capacity Updates"],
+    subject: "General",
+    audience: "All audiences",
   },
 ];

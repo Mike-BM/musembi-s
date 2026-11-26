@@ -1,199 +1,109 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, ShieldCheck, Award, HeartHandshake, Compass, BookOpen, Target, Eye } from "lucide-react";
-import { PageHero, SectionHeading, CtaBand, btn } from "@/components/site/ui";
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHero, CtaBand, SectionHeading } from "@/components/site/ui";
+import { Section, Prose, H3 } from "@/components/site/blocks";
 import { VALUES } from "@/lib/site";
-import { useSite } from "@/lib/portal/context";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Us — Musembi S. Educational Consultancy" },
-      { name: "description", content: "Our mission, academic approach, ethical standards, and commitment to excellence in educational research, mentorship, and professional writing." },
-      { property: "og:title", content: "About Musembi S. Educational Consultancy" },
-      { property: "og:description", content: "Empowering learners, researchers, and professionals through rigorous educational guidance and mentorship." },
-    ],
-  }),
-  component: About,
+  head: () =>
+    pageHead({
+      title: "About Us",
+      description: "Who we are, our vision, mission, values and approach, and the leadership of Samuel Musembi, Founder and Director/CEO.",
+      path: "/about",
+    }),
+  component: AboutPage,
 });
 
-function About() {
-  const { contact: CONTACT } = useSite();
+const CREDENTIALS = [
+  { t: "Academic qualification", d: "Bachelor of Education (Arts) in Kiswahili and Geography, Second Class Honours (Upper Division), Machakos University (Class of 2026). Trained in pedagogy, curriculum implementation, lesson planning, learner assessment, classroom management, educational research and inclusive, learner-centred instruction." },
+  { t: "Teaching and educational practice", d: "Kiswahili, Geography and Social Studies educator with practical teaching experience across senior and junior school institutions in Kenya, specialising in Competency-Based Education (CBE/CBC) and ICT-integrated teaching." },
+  { t: "Consultancy leadership (3+ years)", d: "Leads Musembi S. Educational Consultancy in delivering personalised tuition and learning support, teacher professional development, ethical research and academic guidance, English–Kiswahili and Kiswahili–English translation, professional documentation, professional development and educational resource development." },
+  { t: "Community and environmental engagement", d: "Advocates for environmental awareness, conservation learning, climate change and resilient education, waste-management awareness and community sustainability initiatives that support responsible citizenship and community development." },
+];
+
+function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="About the Consultancy"
-        title="Dedicated to academic rigor, intellectual mentorship, and professional communication."
-        intro="Founded on the belief that meaningful scholarship and professional excellence require meticulous guidance, ethical commitment, and dependable personal collaboration."
-      />
+      <PageHero eyebrow="About Us" title="Every learner, educator and institution has potential." intro="Musembi S. Educational Consultancy was established from the belief that potential can be developed through quality education, purposeful guidance, meaningful mentorship and continuous support." />
 
-      {/* Purpose & Approach Section */}
-      <section className="container-site py-16 sm:py-20 lg:py-24">
-        <div className="grid gap-12 md:grid-cols-12 items-start">
-          <div className="md:col-span-5">
-            <SectionHeading
-              eyebrow="Our Foundation"
-              title="A consultancy built around learning that lasts."
-            />
-            <div className="mt-8 rounded-lg border border-border/80 bg-secondary/40 p-6 text-sm">
-              <p className="font-serif italic text-primary-deep text-base">
-                “Through reliable, accessible, and client-centred services, we support academic achievement, professional development, research excellence, effective communication, and lifelong learning.”
-              </p>
-              <p className="mt-3 text-xs uppercase tracking-wider text-gold font-bold">
-                — Practice Statement
-              </p>
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+          <Prose>
+            <h2 className="font-display text-2xl text-primary-deep">Who we are</h2>
+            <p>We provide educational and professional services that respond to the needs of learners, educators, researchers, professionals, institutions and communities. Our work brings together learning support, educational consultancy, mentorship, research guidance, professional development, language services and practical educational resources.</p>
+            <p>We view education as more than the acquisition of certificates or examination results. It is a foundation for personal growth, social progress and sustainable development. We therefore encourage critical thinking, creativity, confidence, ethical leadership, digital competence, practical skills and lifelong learning.</p>
+          </Prose>
+          <div className="space-y-6">
+            <div className="rounded-lg border border-border bg-card p-6">
+              <H3>Our vision</H3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">To inspire and equip learners, educators, professionals and institutions to excel in the 21st century through knowledge, skills and purposeful guidance.</p>
             </div>
-          </div>
-
-          <div className="md:col-span-7 space-y-5 text-base leading-relaxed text-muted-foreground">
-            <p>
-              <strong>Musembi S. Educational Consultancy</strong> was established to address a persistent challenge in education and professional scholarship: the gap between academic theory, institutional expectations, and the practical execution of high-quality research and documentation.
-            </p>
-            <p>
-              Undergraduate and postgraduate students often navigate complex research requirements, complex referencing styles (APA, Harvard, Chicago), and stringent thesis defenses without sufficient individualized feedback. Similarly, researchers, institutions, and working professionals face demanding standards when preparing journal articles, project proposals, and corporate documents.
-            </p>
-            <p>
-              We provide structured, ethical, and client-focused support at every stage—from framing an initial research problem and refining methodology, to line-by-line substantive editing, 1-on-1 tutoring, and team capacity building.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision Cards */}
-      <section className="border-y border-border/60 bg-secondary/30 py-16 sm:py-20">
-        <div className="container-site">
-          <div className="grid gap-6 md:grid-cols-2">
-            
-            {/* Mission */}
-            <div className="rounded-lg border border-border bg-card p-8 shadow-2xs">
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded bg-secondary text-primary border border-border/50">
-                  <Target className="h-5 w-5" />
-                </span>
-                <span className="eyebrow text-primary/80">Our Mission</span>
-              </div>
-              <h3 className="mt-4 font-display text-xl font-normal text-primary-deep">
-                To empower learners, educators, researchers, professionals, and institutions through excellence, innovation, mentorship, and lifelong learning.
-              </h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                We achieve this by providing accessible, rigorous, and individualized educational and research consulting services that enable our clients to achieve measurable results and long-term capability.
-              </p>
-            </div>
-
-            {/* Vision */}
-            <div className="rounded-lg border border-border bg-card p-8 shadow-2xs">
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded bg-secondary text-primary border border-border/50">
-                  <Eye className="h-5 w-5" />
-                </span>
-                <span className="eyebrow text-primary/80">Our Vision</span>
-              </div>
-              <h3 className="mt-4 font-display text-xl font-normal text-primary-deep">
-                To establish Musembi S. Educational Consultancy as a premier centre for transformative education, research support, professional development, and lifelong learning.
-              </h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                We aspire to be recognized nationally and regionally as a benchmark of intellectual rigor, academic ethics, and dependable advisory support.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Academic Ethics & Quality Assurance */}
-      <section className="container-site py-16 sm:py-20 lg:py-24">
-        <div className="max-w-3xl">
-          <SectionHeading
-            eyebrow="Academic Integrity Policy"
-            title="Our ethical code and commitments to authentic scholarship."
-          />
-          <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
-            <p>
-              At Musembi S. Educational Consultancy, we are steadfastly committed to academic honesty and intellectual integrity. We believe that genuine education develops independent thinking and intellectual ownership.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 pt-4">
-              <div className="rounded-lg border border-border bg-card p-5">
-                <h4 className="text-sm font-bold text-primary-deep flex items-center gap-2">
-                  <Check className="h-4 w-4 text-gold shrink-0" />
-                  What We Do
-                </h4>
-                <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
-                  <li>• Critical methodology review and structural guidance</li>
-                  <li>• Grammatical, stylistic, and citation copyediting</li>
-                  <li>• Substantive feedback on logic and argumentation</li>
-                  <li>• One-to-one coaching and defense preparation</li>
-                  <li>• Reference auditing and plagiarism prevention advice</li>
-                </ul>
-              </div>
-
-              <div className="rounded-lg border border-border bg-card p-5">
-                <h4 className="text-sm font-bold text-primary-deep flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-gold shrink-0" />
-                  What We Uphold
-                </h4>
-                <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
-                  <li>• We do not ghostwrite student theses or assignments</li>
-                  <li>• We do not complete academic examinations for clients</li>
-                  <li>• All research data and personal drafts remain strictly confidential</li>
-                  <li>• We adhere strictly to institutional research ethics guidelines</li>
-                  <li>• Clear attribution and citation honesty in all documentation</li>
-                </ul>
-              </div>
+            <div className="rounded-lg border border-border bg-card p-6">
+              <H3>Our mission</H3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">To deliver high-quality, accessible and innovative educational and professional services that empower learners, educators, professionals and institutions through learning, mentorship, consultancy and support.</p>
             </div>
           </div>
         </div>
+      </Section>
 
-        {/* 6 Core Practice Standards */}
-        <div className="mt-16 pt-12 border-t border-border/60">
-          <h3 className="font-display text-2xl font-normal text-primary-deep mb-8">
-            The Standards We Bring to Every Engagement
-          </h3>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {VALUES.map(({ title, subtitle, text, icon: Icon }) => (
-              <div key={title} className="rounded-lg border border-border bg-card p-5 shadow-2xs">
-                <div className="flex items-center gap-2.5">
-                  <span className="grid h-7 w-7 place-items-center rounded bg-secondary text-primary">
-                    <Icon className="h-3.5 w-3.5" />
-                  </span>
-                  <h4 className="text-sm font-bold text-primary-deep">{title}</h4>
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{text}</p>
-              </div>
-            ))}
+      <Section tone="soft">
+        <SectionHeading eyebrow="Our core values" title="What guides our work" />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {VALUES.map((v) => (
+            <div key={v.title} className="rounded-lg border border-border bg-card p-6">
+              <span className="grid h-10 w-10 place-items-center rounded-md border border-border/60 bg-secondary text-primary">
+                <v.icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+              </span>
+              <h3 className="mt-4 font-display text-lg text-primary-deep">{v.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{v.text}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-2">
+          <Prose>
+            <h2 className="font-display text-2xl text-primary-deep">Our approach</h2>
+            <p>We begin by listening and understanding the client’s needs and intended outcomes. We then agree on the scope of work, deliverables, timeline and fee before work starts. We value clear communication, confidentiality, collaboration and responsible use of information.</p>
+            <h2 className="pt-4 font-display text-2xl text-primary-deep">Where we operate</h2>
+            <p>The Consultancy is based in Kikima Town, Mbooni West Sub-County, Makueni County, Kenya. Services may be delivered in person by arrangement, online and through appropriate institutional or community partnerships. Support outside Kenya may be arranged where suitable and legally permitted.</p>
+          </Prose>
+          <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
+            <h2 className="font-display text-2xl text-primary-deep">Founder and leadership</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Samuel Musembi is the Founder and Director/CEO of Musembi S. Educational Consultancy. He provides leadership and direction for the Consultancy’s work and its commitment to educational support, mentorship, research, professional services and responsible practice.</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">With over three years of experience offering educational, linguistic and professional services, he brings together classroom teaching experience, Competency-Based Education (CBE/CBC) practice, data-driven research support, technical writing and bilingual communication. His approach is grounded in the belief that education should go beyond syllabus coverage to build measurable understanding, digital competence, critical thinking and lifelong capabilities.</p>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Leadership & Location summary */}
-      <section className="border-t border-border/60 bg-secondary/40 py-16">
-        <div className="container-site">
-          <div className="max-w-2xl">
-            <span className="eyebrow">Consultancy Details</span>
-            <h3 className="mt-3 font-display text-2xl font-normal text-primary-deep">
-              Based in Kikima, Kenya · Serving Clients Globally
-            </h3>
-            <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-              <p>
-                <strong>Location:</strong> Based in Kikima, Kenya · Serving Clients Globally
-              </p>
-              <p>
-                <strong>Delivery Modes:</strong> Virtual consultations conducted through Google Meet, Zoom, and WhatsApp. In-person meetings by scheduled appointment.
-              </p>
-              <p>
-                <strong>Client Assurance:</strong> Every client is assigned a designated lead consultant to ensure project continuity, clear communication, and timely milestone tracking.
-              </p>
+      <Section tone="soft">
+        <SectionHeading eyebrow="Credentials & experience" title="Experience behind the work" />
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {CREDENTIALS.map((c) => (
+            <div key={c.t} className="rounded-lg border border-border bg-card p-6">
+              <h3 className="font-display text-lg text-primary-deep">{c.t}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
             </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/contact" className={btn.primary}>
-                Contact the Consultancy
-              </Link>
-              <Link to="/services" className={btn.outline}>
-                Explore Practice Areas
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
+      <Section>
+        <SectionHeading eyebrow="Professional standards" title="Safeguarding, inclusion and responsible practice" />
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {[
+            { t: "Safeguarding and learner well-being", d: "The dignity, safety and well-being of learners are important to us. We seek to maintain respectful learning environments, appropriate professional boundaries and responsible communication. Where activities involve children, young people or other vulnerable learners, applicable safeguarding and child-protection requirements are observed." },
+            { t: "Inclusion and equal opportunity", d: "We value fairness, dignity and equal opportunity. We respect diversity and seek to make our services accessible and responsive to different educational needs and circumstances. Clients may inform us of reasonable access or learning-support needs when making an enquiry." },
+            { t: "Responsible environmental practice", d: "Environmental and community activities are planned with attention to safety, appropriate permissions, supervision and relevant precautions. Hazardous waste, chemicals, sharp objects and contaminated materials are handled only by competent persons using appropriate protective measures." },
+          ].map((c) => (
+            <div key={c.t} className="rounded-lg border border-border bg-card p-6">
+              <h3 className="font-display text-lg text-primary-deep">{c.t}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
       <CtaBand />
     </>
   );

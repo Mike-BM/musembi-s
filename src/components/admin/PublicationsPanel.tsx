@@ -10,7 +10,7 @@ import { Field, btn, inputCls } from "@/components/site/ui";
 import { cn } from "@/lib/utils";
 import { Modal, Notice, PanelHeader, errMsg, moveItem, splitCommas } from "./shared";
 
-type Draft = Omit<Publication, "topics"> & { topics: string };
+type Draft = Omit<Publication, "topics" | "subject" | "level" | "audience"> & { topics: string; subject: string; level: string; audience: string };
 
 const today = () => new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
@@ -24,10 +24,13 @@ const blank = (): Draft => ({
   fileSize: "",
   description: "",
   topics: "",
+  subject: "",
+  level: "",
+  audience: "",
   downloadUrl: "",
 });
 
-const toDraft = (p: Publication): Draft => ({ ...p, topics: p.topics.join(", "), downloadUrl: p.downloadUrl ?? "" });
+const toDraft = (p: Publication): Draft => ({ ...p, topics: p.topics.join(", "), subject: p.subject ?? "", level: p.level ?? "", audience: p.audience ?? "", downloadUrl: p.downloadUrl ?? "" });
 
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -85,7 +88,13 @@ export function PublicationsPanel({ initial, storageConfigured }: { initial: Pub
 
   async function submit() {
     if (!draft) return;
-    const candidate = { ...draft, topics: splitCommas(draft.topics) };
+    const candidate = {
+      ...draft,
+      topics: splitCommas(draft.topics),
+      subject: draft.subject.trim() || undefined,
+      level: draft.level.trim() || undefined,
+      audience: draft.audience.trim() || undefined,
+    };
     const parsed = publicationSchema.safeParse(candidate);
     if (!parsed.success) {
       setFormError(parsed.error.issues[0]?.message ?? "Please check the form.");
@@ -199,6 +208,18 @@ export function PublicationsPanel({ initial, storageConfigured }: { initial: Pub
             <Field label="Topics" id="pub-topics" hint="Separate with commas">
               <input id="pub-topics" className={inputCls} value={draft.topics} onChange={(e) => set("topics", e.target.value)} />
             </Field>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Field label="Subject" id="pub-subject" hint="Optional">
+                <input id="pub-subject" className={inputCls} value={draft.subject} onChange={(e) => set("subject", e.target.value)} placeholder="e.g. Kiswahili" />
+              </Field>
+              <Field label="Education level" id="pub-level" hint="Optional">
+                <input id="pub-level" className={inputCls} value={draft.level} onChange={(e) => set("level", e.target.value)} placeholder="e.g. Junior School" />
+              </Field>
+              <Field label="Audience" id="pub-aud" hint="Optional">
+                <input id="pub-aud" className={inputCls} value={draft.audience} onChange={(e) => set("audience", e.target.value)} placeholder="e.g. Teachers" />
+              </Field>
+            </div>
 
             <div className="rounded-md border border-border bg-secondary/30 p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Downloadable file</p>

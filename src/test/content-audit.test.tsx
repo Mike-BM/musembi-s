@@ -1,41 +1,65 @@
 import { describe, expect, it } from "vitest";
-import { CONTACT, SERVICES, AUDIENCES, INITIAL_PUBLICATIONS } from "@/lib/site";
+import { BRAND, CONTACT, SERVICES, VALUES, AUDIENCES, TRAINING_AREAS, INITIAL_PUBLICATIONS } from "@/lib/site";
 
-describe("Website Content Review & Audit Verification", () => {
-  it("has Kikima, Kenya as primary location and includes postal address", () => {
-    expect(CONTACT.location).toBe("Kikima, Kenya");
-    expect(CONTACT.postalAddress).toBe("P.O Box 112-90125 Kikima, Makueni County");
+// Checks the site data against the approved Final Website Update & Implementation Brief (24 Nov 2026).
+describe("Final website brief: identity and contact", () => {
+  it("uses the official name, tagline and contact details", () => {
+    expect(BRAND.name).toBe("Musembi S. Educational Consultancy");
+    expect(BRAND.tagline).toBe("Unlocking Potential, Shaping Futures");
     expect(CONTACT.phoneDisplay).toBe("0794 191 690");
+    expect(CONTACT.phoneIntl).toBe("254794191690");
     expect(CONTACT.email).toBe("info.musembisconsultancy@gmail.com");
+    expect(CONTACT.location).toBe("Kikima Town, Mbooni West Sub-County, Makueni County, Kenya");
+    expect(CONTACT.postalAddress).toBe("P.O. Box 112-90125, Kikima, Kenya");
+    expect(CONTACT.availability).toBe("Monday–Saturday, 8:00 AM–6:00 PM EAT");
   });
 
-  it("integrates CBC/CBE Advisory into Service 01 (Educational Consultancy & Research Support)", () => {
-    const s1 = SERVICES.find((s) => s.slug === "consultancy-research");
-    expect(s1).toBeDefined();
-    expect(s1?.summary).toContain("Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory");
-    expect(s1?.deliverables).toContain("Competency-Based Curriculum (CBC) / Competency-Based Education (CBE) Advisory");
-    expect(s1?.audience).toContain("undergraduate");
-  });
-
-  it("aligns education terminology to junior and senior school in Service 09 (Online Tutoring)", () => {
-    const s9 = SERVICES.find((s) => s.slug === "tutoring");
-    expect(s9).toBeDefined();
-    expect(s9?.audience).toContain("junior, senior school");
-    expect(s9?.audience).not.toContain("Secondary and tertiary");
-  });
-
-  it("clarifies service boundaries by reviewing scholarly work in audience and practice descriptors", () => {
-    const researchers = AUDIENCES.find((a) => a.title === "Researchers & Scholars");
-    expect(researchers).toBeDefined();
-    expect(researchers?.description).toContain("reviewing scholarly work");
-  });
-
-  it("provides publication repository items for Training Manuals, Scholarly Articles, and Newsletters", () => {
-    expect(INITIAL_PUBLICATIONS.length).toBeGreaterThanOrEqual(3);
-    const types = INITIAL_PUBLICATIONS.map((p) => p.category);
-    expect(types).toContain("Training Manual");
-    expect(types).toContain("Scholarly Article");
-    expect(types).toContain("Newsletter");
+  it("uses '24 business hours' wording everywhere, never a bare '24 hours'", () => {
+    expect(CONTACT.responseGuarantee).toContain("24 business hours");
+    const all = JSON.stringify({ SERVICES, VALUES, AUDIENCES, TRAINING_AREAS, INITIAL_PUBLICATIONS });
+    expect(all).not.toMatch(/within 24 hours/i);
   });
 });
 
+describe("Final website brief: content", () => {
+  it("lists all thirteen service areas from the Services page copy", () => {
+    expect(SERVICES).toHaveLength(13);
+    const titles = SERVICES.map((s) => s.title);
+    for (const t of [
+      "Educational consultancy",
+      "Tuition and learning support",
+      "Mentorship and guidance",
+      "Teacher support and professional development",
+      "Curriculum, CBC/CBE and assessment support",
+      "Research and academic support",
+      "Career and professional services",
+      "Language services",
+      "Content and learning-resource development",
+      "Digital learning and educational technology",
+      "Workshops and training",
+      "Educational projects and partnerships",
+      "Environmental education and sustainability",
+    ]) {
+      expect(titles).toContain(t);
+    }
+    expect(new Set(SERVICES.map((s) => s.slug)).size).toBe(SERVICES.length);
+  });
+
+  it("has the five core values", () => {
+    expect(VALUES.map((v) => v.title)).toEqual(["Excellence", "Integrity", "Innovation", "Empowerment", "Inclusivity"]);
+  });
+
+  it("covers the five audiences and the training areas", () => {
+    expect(AUDIENCES).toHaveLength(5);
+    expect(TRAINING_AREAS.length).toBe(8);
+  });
+
+  it("does not claim fixed fees anywhere in built-in content", () => {
+    expect(JSON.stringify(SERVICES)).not.toMatch(/KSh|KES|\$\d/);
+  });
+
+  it("keeps built-in resource entries valid for the library filters", () => {
+    expect(INITIAL_PUBLICATIONS.length).toBeGreaterThan(0);
+    for (const p of INITIAL_PUBLICATIONS) expect(p.title.length).toBeGreaterThan(3);
+  });
+});

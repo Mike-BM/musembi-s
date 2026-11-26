@@ -57,3 +57,12 @@ describe("admin helpers", () => {
     expect(moveItem([1, 2, 3], 0, -1)).toEqual([1, 2, 3]);
   });
 });
+
+describe("enquiry consent", () => {
+  const base = { name: "Jane", email: "jane@example.com", phone: "0794191690", service: "Language services", message: "Please translate my document.", contactMethod: "Email" as const };
+  it("requires consent to the Privacy Notice", () => {
+    expect(enquiryInputSchema.safeParse(base).success).toBe(false);
+    expect(enquiryInputSchema.safeParse({ ...base, consent: false }).success).toBe(false);
+    expect(enquiryInputSchema.safeParse({ ...base, consent: true, delivery: "Online" }).success).toBe(true);
+  });
+});

@@ -5,17 +5,16 @@ import { PageHero, WhatsAppIcon, btn } from "@/components/site/ui";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { useSite } from "@/lib/portal/context";
 import { cn } from "@/lib/utils";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   validateSearch: z.object({ service: z.string().optional() }),
-  head: () => ({
-    meta: [
-      { title: "Contact Us & Request Consultation — Musembi S. Educational Consultancy" },
-      { name: "description", content: "Contact Musembi S. Educational Consultancy in Kikima, Kenya. Call or WhatsApp 0794 191 690, email info.musembisconsultancy@gmail.com, or submit an enquiry." },
-      { property: "og:title", content: "Contact Musembi S. Educational Consultancy" },
-      { property: "og:description", content: "Request an academic consultation, research review, or institutional training." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Contact Us",
+      description: "Call or WhatsApp 0794 191 690, email info.musembisconsultancy@gmail.com or send an enquiry. Based in Kikima Town, Makueni County, Kenya. We aim to respond within 24 business hours.",
+      path: "/contact",
+    }),
   component: ContactPage,
 });
 
@@ -26,9 +25,9 @@ function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Contact & Consultation"
-        title="Discuss your research, academic project, or training needs."
-        intro="Reach us directly by phone, WhatsApp, or email, or submit a detailed consultation enquiry below. All communications remain strictly confidential."
+        eyebrow="Contact"
+        title="Let us discuss how we can support your goals."
+        intro="Whether you are seeking learning support, educational guidance, research or advisory assistance, professional development, language services or an institutional programme, we invite you to get in touch."
       />
 
       <section className="container-site py-12 sm:py-16 lg:py-20">
@@ -53,7 +52,7 @@ function ContactPage() {
                 </div>
               </div>
               <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
-                Connect directly with the consultancy for quick turnaround enquiries or urgent deadlines.
+                Prefer to speak to us? Call or send a WhatsApp message.
               </p>
               <div className="mt-4 flex flex-wrap gap-2.5">
                 <a
@@ -70,7 +69,7 @@ function ContactPage() {
                   className={cn(btn.outline, "text-xs py-2 px-4")}
                 >
                   <Phone className="h-3.5 w-3.5 text-gold" />
-                  <span>Call Office</span>
+                  <span>Call us</span>
                 </a>
               </div>
             </div>
@@ -94,7 +93,7 @@ function ContactPage() {
               <div className="flex items-start gap-3 pt-3 border-t border-border/50">
                 <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-primary-deep">Postal Address</p>
+                  <p className="font-semibold text-primary-deep">Postal address</p>
                   <p className="text-muted-foreground mt-0.5">
                     {CONTACT.postalAddress}
                   </p>
@@ -104,12 +103,12 @@ function ContactPage() {
               <div className="flex items-start gap-3 pt-3 border-t border-border/50">
                 <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-primary-deep">Location & Service Modes</p>
+                  <p className="font-semibold text-primary-deep">Principal place of operation</p>
                   <p className="text-muted-foreground mt-0.5">
                     {CONTACT.location}
                   </p>
                   <p className="text-muted-foreground mt-0.5">
-                    Virtual consultations conducted via Google Meet, Zoom, and WhatsApp. In-person meetings by appointment.
+                    Service delivery: in person by arrangement; online and digital services where suitable.
                   </p>
                 </div>
               </div>
@@ -117,7 +116,7 @@ function ContactPage() {
               <div className="flex items-start gap-3 pt-3 border-t border-border/50">
                 <Clock className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-primary-deep">Consultation Hours</p>
+                  <p className="font-semibold text-primary-deep">Official public operating hours</p>
                   <p className="text-muted-foreground mt-0.5">
                     {CONTACT.availability}
                   </p>
@@ -128,20 +127,20 @@ function ContactPage() {
             {/* What to Expect Process Box */}
             <div className="rounded-lg border border-border/80 bg-secondary/50 p-6 space-y-3">
               <h4 className="font-display text-sm font-semibold text-primary-deep">
-                What to Expect After Inquiring
+                What happens after you enquire
               </h4>
               <ul className="space-y-2.5 text-xs text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                  <span><strong>Step 1:</strong> Initial review of your project scope deliverables and deadlines within 24 business hours.</span>
+                  <span><strong>Step 1:</strong> We aim to review and respond to your enquiry within 24 business hours.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                  <span><strong>Step 2:</strong> Brief scoping dialogue (via WhatsApp or email) to confirm institutional guidelines and academic requirements.</span>
+                  <span><strong>Step 2:</strong> Where necessary, a short conversation to clarify your requirements.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                  <span><strong>Step 3:</strong> Transparent timeline and engagement plan with direct consultant support.</span>
+                  <span><strong>Step 3:</strong> A quotation with the scope, fee and timeline. Work begins only after you approve.</span>
                 </li>
               </ul>
             </div>
@@ -151,9 +150,9 @@ function ContactPage() {
           {/* Right Column: Comprehensive Enquiry Form */}
           <div className="lg:col-span-7 rounded-lg border border-border bg-card p-6 sm:p-8 lg:p-10 shadow-soft">
             <div className="mb-6">
-              <span className="eyebrow">Service Enquiry</span>
+              <span className="eyebrow">Website enquiry form</span>
               <h2 className="mt-1 font-display text-2xl font-normal text-primary-deep">
-                Tell us about your requirements
+                Tell us what you need
               </h2>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
                 Provide as much detail as possible to help us assess your needs. Fields marked with an asterisk (*) are required.

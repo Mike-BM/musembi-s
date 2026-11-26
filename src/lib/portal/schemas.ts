@@ -6,13 +6,26 @@ import type { Article, Publication } from "@/lib/site";
  * Used on the server (to reject bad data) and in the admin forms.
  */
 export const ARTICLE_CATEGORIES = [
+  "Teaching & Learning",
+  "Study & Examination Guidance",
+  "CBC/CBE",
   "Research Methodology",
   "Academic Writing",
   "Career & Documentation",
   "Study Skills",
+  "Professional Development",
+  "Digital Learning",
+  "Environmental Education",
 ] as const;
 
-export const PUBLICATION_CATEGORIES = ["Training Manual", "Scholarly Article", "Newsletter"] as const;
+export const PUBLICATION_CATEGORIES = [
+  "Study Guide",
+  "Teaching Material",
+  "Training Manual",
+  "Scholarly Article",
+  "Newsletter",
+  "Handbook",
+] as const;
 
 export const ENQUIRY_STATUSES = ["new", "in_progress", "done", "spam"] as const;
 export type EnquiryStatus = (typeof ENQUIRY_STATUSES)[number];
@@ -74,6 +87,9 @@ export const publicationSchema = z.object({
   fileSize: text(30),
   description: text(900).min(5),
   topics: z.array(text(80).min(1)).max(12),
+  subject: text(80).optional(),
+  level: text(80).optional(),
+  audience: text(120).optional(),
   downloadUrl: z
     .string()
     .trim()
@@ -91,14 +107,18 @@ export const enquiryInputSchema = z.object({
   academicLevel: text(100).optional(),
   service: text(200).min(1),
   timeline: text(100).optional(),
+  delivery: text(40).optional(),
   message: text(2500).min(10),
   contactMethod: z.enum(["WhatsApp", "Email", "Phone"]),
+  /** Visitor agreed to the Privacy Notice. */
+  consent: z.literal(true),
   /** Honeypot: real people never fill this hidden field. */
   website: text(200).optional(),
 });
 export type EnquiryInput = z.infer<typeof enquiryInputSchema>;
 
 export const enquiryRecordSchema = enquiryInputSchema.omit({ website: true }).extend({
+  consent: z.boolean().optional(),
   id: z.string(),
   createdAt: z.string(),
   updatedAt: z.string().optional(),

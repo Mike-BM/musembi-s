@@ -25,9 +25,9 @@ function csvCell(v: string | undefined) {
 }
 
 function exportCsv(rows: EnquiryRecord[]) {
-  const head = ["Date", "Status", "Name", "Email", "Phone", "Stage", "Service", "Timeline", "Contact method", "Message", "Notes"];
+  const head = ["Date", "Status", "Name", "Email", "Phone", "Enquiring as", "Service", "Delivery", "Preferred dates", "Contact method", "Message", "Notes"];
   const lines = rows.map((r) =>
-    [fmt(r.createdAt), ENQUIRY_STATUS_LABEL[r.status], r.name, r.email, r.phone, r.academicLevel, r.service, r.timeline, r.contactMethod, r.message, r.notes]
+    [fmt(r.createdAt), ENQUIRY_STATUS_LABEL[r.status], r.name, r.email, r.phone, r.academicLevel, r.service, r.delivery, r.timeline, r.contactMethod, r.message, r.notes]
       .map(csvCell)
       .join(","),
   );
@@ -181,8 +181,9 @@ export function EnquiriesPanel({ storageConfigured }: { storageConfigured: boole
                   ["Email", current.email],
                   ["Phone / WhatsApp", current.phone],
                   ["Service", current.service],
-                  ["Stage", current.academicLevel || "-"],
-                  ["Timeline", current.timeline || "-"],
+                  ["Enquiring as", current.academicLevel || "-"],
+                  ["Delivery", current.delivery || "-"],
+                  ["Preferred dates", current.timeline || "-"],
                   ["Preferred contact", current.contactMethod],
                 ] as const
               ).map(([k, v]) => (

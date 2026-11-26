@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 import { SiteHeader, SiteFooter } from "@/components/site/Layout";
+import { BRAND, CONTACT } from "@/lib/site";
 import { PortalProvider } from "@/lib/portal/context";
 import { getPortalContent } from "@/lib/portal/api";
 
@@ -56,10 +57,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Musembi S. Educational Consultancy" },
-      { name: "description", content: "Education, research support, mentorship, writing, translation and professional development consultancy." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Musembi S. Educational Consultancy — Unlocking Potential, Shaping Futures" },
+      { name: "description", content: "Quality tuition and learning support, educational guidance, teacher development, research support and professional services in Kikima, Makueni County, Kenya." },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          name: BRAND.name,
+          slogan: BRAND.tagline,
+          description: BRAND.strapline,
+          telephone: "+" + CONTACT.phoneIntl,
+          email: CONTACT.email,
+          address: { "@type": "PostalAddress", streetAddress: "P.O. Box 112-90125", addressLocality: "Kikima", addressRegion: "Makueni County", addressCountry: "KE" },
+          areaServed: "KE",
+          openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "18:00" }],
+        }),
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

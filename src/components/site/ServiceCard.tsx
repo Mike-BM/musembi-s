@@ -43,10 +43,10 @@ export function ServiceCard({
       {!compact && service.deliverables && service.deliverables.length > 0 && (
         <div className="mt-4 pt-4 border-t border-border/50">
           <p className="text-[0.7rem] font-bold uppercase tracking-wider text-primary/80 mb-2">
-            Key Deliverables
+            May include
           </p>
           <ul className="space-y-1.5 text-xs text-foreground/80">
-            {service.deliverables.slice(0, 3).map((item, i) => (
+            {service.deliverables.slice(0, 4).map((item, i) => (
               <li key={i} className="flex items-start gap-2">
                 <Check className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
                 <span>{item}</span>
@@ -57,7 +57,7 @@ export function ServiceCard({
       )}
 
       <div className="mt-auto pt-6 flex items-center justify-between border-t border-border/40">
-        <span className="text-xs text-muted-foreground line-clamp-1 max-w-[65%]">
+        <span className="text-xs text-muted-foreground max-w-[65%]">
           {service.audience}
         </span>
         <Link 

@@ -1,159 +1,78 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { PageHero, SectionHeading, WhatsAppButton, btn } from "@/components/site/ui";
+import { ArrowRight, ShieldCheck } from "lucide-react";
+import { PageHero, CtaBand, btn } from "@/components/site/ui";
+import { Section } from "@/components/site/blocks";
 import { ServiceCard } from "@/components/site/ServiceCard";
-import { EnquiryForm } from "@/components/site/EnquiryForm";
-import { SERVICE_CATEGORIES, type Service } from "@/lib/site";
+import { ACADEMIC_INTEGRITY, SERVICE_CATEGORIES } from "@/lib/site";
 import { useSite } from "@/lib/portal/context";
-import { BookOpen, FileCheck, Languages, Users } from "lucide-react";
+import { pageHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services — Musembi S. Educational Consultancy" },
-      { name: "description", content: "Academic research support, scholarly editing, proposal drafting, CV review, online tutoring, and English–Kiswahili translation for scholars and institutions." },
-      { property: "og:title", content: "Our Services — Musembi S. Educational Consultancy" },
-      { property: "og:description", content: "Ten specialized services supporting academic achievement, research rigor, and professional growth." },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Services",
+      description: "Educational consultancy, tuition, mentorship, teacher support, CBC/CBE, research, career, language, digital learning, workshops, projects and environmental education.",
+      path: "/services",
+    }),
   component: ServicesPage,
 });
 
 function ServicesPage() {
-  const { services: SERVICES } = useSite();
-  const [activeTab, setActiveTab] = useState<typeof SERVICE_CATEGORIES[number]>("All Services");
-
-  const filteredServices = activeTab === "All Services"
-    ? SERVICES
-    : SERVICES.filter((s) => s.category === activeTab);
+  const { services } = useSite();
+  const [cat, setCat] = useState<(typeof SERVICE_CATEGORIES)[number]>("All Services");
+  const shown = cat === "All Services" ? services : services.filter((s) => s.category === cat);
 
   return (
     <>
       <PageHero
-        eyebrow="Our Services"
-        title="Expert support for every stage of study, research, and professional work."
-        intro="Browse our specialized services across academic research, scholarly writing, career documentation, bilingual translation, and institutional capacity building."
+        eyebrow="Services"
+        title="Support for education, research, careers and community development."
+        intro="Our services respond to educational, research, professional and community-development needs. Each engagement is discussed and scoped according to the client’s objectives, the nature of the service and the resources required."
       />
-
-      {/* Services Directory Section */}
-      <section className="container-site py-12 sm:py-16 lg:py-20">
-        
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 pb-8 border-b border-border/60">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mr-2">
-            Filter by:
-          </span>
-          {SERVICE_CATEGORIES.map((cat) => (
+      <Section>
+        <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter services">
+          {SERVICE_CATEGORIES.map((c) => (
             <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
+              key={c}
+              type="button"
+              onClick={() => setCat(c)}
+              aria-pressed={cat === c}
               className={cn(
-                "rounded-md px-3.5 py-1.5 text-xs font-medium transition-colors cursor-pointer",
-                activeTab === cat
-                  ? "bg-primary text-white shadow-2xs"
-                  : "bg-secondary text-foreground/80 hover:bg-secondary/80 hover:text-foreground"
+                "rounded-md px-3.5 py-1.5 text-xs font-medium transition-colors",
+                cat === c ? "bg-primary text-white" : "bg-secondary text-foreground/80 hover:bg-secondary/70",
               )}
             >
-              {cat}
+              {c}
             </button>
           ))}
         </div>
-
-        {/* Filtered Grid */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredServices.map((s, i) => (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {shown.map((s, i) => (
             <ServiceCard key={s.slug} service={s} index={i} />
           ))}
         </div>
-      </section>
+        {shown.length === 0 && <p className="py-10 text-center text-sm text-muted-foreground">No services in this category.</p>}
 
-      {/* Differentiated Practice Pillars (Deep Dive) */}
-      <section className="border-t border-border/60 bg-secondary/30 py-16 sm:py-20">
-        <div className="container-site space-y-16">
-          <SectionHeading
-            eyebrow="Service Structure"
-            title="How our practice areas work together."
-            intro="We organize our engagements to ensure clear deliverables, measurable progress, and academic integrity."
-          />
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-6 shadow-2xs">
-              <div className="h-9 w-9 rounded bg-secondary text-primary flex items-center justify-center mb-4">
-                <BookOpen className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-base font-normal text-primary-deep">
-                1. Academic & Research
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Targeted support for CBC/CBE Advisory, theses, dissertations, methodology instruments, and proposal concept notes.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-border bg-card p-6 shadow-2xs">
-              <div className="h-9 w-9 rounded bg-secondary text-primary flex items-center justify-center mb-4">
-                <FileCheck className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-base font-normal text-primary-deep">
-                2. Documentation & Career
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                High-impact academic CVs, executive resumes, institutional manuals, and publication-ready editing.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-border bg-card p-6 shadow-2xs">
-              <div className="h-9 w-9 rounded bg-secondary text-primary flex items-center justify-center mb-4">
-                <Languages className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-base font-normal text-primary-deep">
-                3. Linguistic & Translation
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                High-fidelity English ↔ Kiswahili translation for research instruments, surveys, and formal texts.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-border bg-card p-6 shadow-2xs">
-              <div className="h-9 w-9 rounded bg-secondary text-primary flex items-center justify-center mb-4">
-                <Users className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-base font-normal text-primary-deep">
-                4. Mentorship & Training
-              </h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                One-to-one virtual tutoring, research coaching, and structured faculty and team workshops.
-              </p>
-            </div>
+        <div className="mt-14 flex items-start gap-3 rounded-lg border border-border bg-secondary/40 p-6">
+          <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+          <div>
+            <h2 className="font-display text-lg text-primary-deep">Academic integrity and responsible support</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{ACADEMIC_INTEGRITY}</p>
           </div>
         </div>
-      </section>
-
-      {/* Enquiry Form Section */}
-      <section id="enquire" className="container-site py-16 sm:py-20 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 space-y-6">
-            <SectionHeading
-              eyebrow="Request a Service"
-              title="Tell us about your requirements."
-              intro="Submit an enquiry below with your specific requirements, stage, and timeline. We review each submission personally and respond within 24 hours."
-            />
-            <div className="space-y-3 pt-2">
-              <p className="text-xs uppercase tracking-wider font-semibold text-muted-foreground">
-                Prefer immediate assistance?
-              </p>
-              <WhatsAppButton text="Hello Musembi S. Educational Consultancy, I would like to enquire about your services." />
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 rounded-lg border border-border bg-card p-6 sm:p-8 shadow-soft">
-            <h3 className="font-display text-xl font-normal text-primary-deep mb-6">
-              Consultation & Service Enquiry
-            </h3>
-            <EnquiryForm />
-          </div>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link to="/contact" className={btn.primary}>
+            <span>Request a Consultation</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link to="/how-it-works" className={btn.outline}>
+            <span>See How It Works</span>
+          </Link>
         </div>
-      </section>
+      </Section>
+      <CtaBand />
     </>
   );
 }
